@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://ebrko1teakno"]
+
+[ext_resource type="Texture2D" uid="uid://delqn1dwsjp5a" path="res://Assets/Stills/Enemy_base.png" id="1_hpyro"]
+[ext_resource type="Script" path="res://minion.gd" id="1_yb4y7"]
+[ext_resource type="AudioStream" uid="uid://c2ci2gktidda3" path="res://Assets/SoundEffects/REAL_caleb_freestyle (mp3cut.net).mp3" id="3_5dmmx"]
+[ext_resource type="AudioStream" uid="uid://dje11ndsn4hjp" path="res://Assets/SoundEffects/REAL_caleb_freestyle.mp3" id="3_chjhp"]
+[ext_resource type="AudioStream" uid="uid://h2mswmhtacrx" path="res://Assets/SoundEffects/anishExplode.wav" id="3_ew5u8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s0qye"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hpyro")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ohlwv"]
+radius = 15.0
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_as1q3"]
+file = "res://Assets/videos/explosin.ogg"
+
+[node name="Minion" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_yb4y7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_s0qye")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_ohlwv")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_ohlwv")
+
+[node name="RealCalebFreestyle" type="AudioStreamPlayer" parent="Area2D"]
+stream = ExtResource("3_5dmmx")
+
+[node name="AnishExplodeSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ew5u8")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+offset_left = -40.0
+offset_top = -21.0
+offset_right = 40.0
+offset_bottom = 19.0
+ratio = 0.8199
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="AspectRatioContainer"]
+layout_mode = 2
+stream = SubResource("VideoStreamTheora_as1q3")
+expand = true
+
+[node name="RealCalebFreestyleFinality" type="AudioStreamPlayer" parent="AspectRatioContainer"]
+stream = ExtResource("3_chjhp")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="finished" from="AnishExplodeSfx" to="." method="_on_anish_explode_sfx_finished"]
+[connection signal="finished" from="AspectRatioContainer/VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]

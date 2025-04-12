@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c65b266i7yl6b"]
+
+[ext_resource type="PackedScene" uid="uid://cuvxxqeounqn2" path="res://player.tscn" id="1_ms5cr"]
+[ext_resource type="PackedScene" uid="uid://ebrko1teakno" path="res://minion.tscn" id="2_41j47"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_ms5cr")]
+
+[node name="Minion" parent="." instance=ExtResource("2_41j47")]
+position = Vector2(66, -63)

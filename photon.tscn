@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3wawtklbp5u4"]
+
+[ext_resource type="Script" path="res://photon.gd" id="1_q0skd"]
+[ext_resource type="Texture2D" uid="uid://b848moe46270h" path="res://Assets/Stills/photon.png" id="1_w2usk"]
+[ext_resource type="AudioStream" uid="uid://bmmtt50mlu6oe" path="res://Assets/SoundEffects/PhotonBlast.wav" id="3_27r34"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_28gcl"]
+
+[node name="Photon" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_q0skd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.720215, 0.78125)
+texture = ExtResource("1_w2usk")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_27r34")
+autoplay = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -2)
+scale = Vector2(0.3, 1.1)
+shape = SubResource("CircleShape2D_28gcl")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

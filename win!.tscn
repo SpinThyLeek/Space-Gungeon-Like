@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://8a8uf4k41tri"]
+
+[ext_resource type="Script" path="res://win!.gd" id="1_eve3c"]
+[ext_resource type="Texture2D" uid="uid://cjwc6cdlbe3kl" path="res://Assets/Stills/image0 (1).jpg" id="1_wdg7a"]
+
+[node name="winner" type="Node2D"]
+script = ExtResource("1_eve3c")
+
+[node name="Image0(1)" type="Sprite2D" parent="."]
+position = Vector2(20, 591)
+texture = ExtResource("1_wdg7a")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = -83.0
+offset_top = -48.0
+offset_right = 90.0
+offset_bottom = 21.0
+text = "YOU WIN!"
